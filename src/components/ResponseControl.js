@@ -14,20 +14,43 @@ class ResponseControl extends React.Component {
     };
   }
 
+  promptList = [
+    {
+      text: "this is the first prompt",
+      id: 1
+    },
+    {
+      text: "and this is the second",
+      id: 2
+    },
+    {
+      text: "here goes the third one",
+      id: 3
+    },
+    {
+      text: "and the fourth and final prompt",
+      id: 4
+    }
+  ];
+
   showPrompt1 = () => {
-    this.setState({selectedPrompt: 1});
+    this.setState({selectedPrompt: this.promptList[0]});
   }
 
   showPrompt2 = () => {
-    this.setState({selectedPrompt: 2});
+    this.setState({selectedPrompt: this.promptList[1]});
   }
 
   showPrompt3 = () => {
-    this.setState({selectedPrompt: 3});
+    this.setState({selectedPrompt: this.promptList[2]});
   }
 
   showPrompt4 = () => {
-    this.setState({selectedPrompt: 4});
+    this.setState({selectedPrompt: this.promptList[3]});
+  }
+
+  showForm = () => {
+    this.setState({formVisible: true});
   }
 
   render() {
@@ -38,7 +61,8 @@ class ResponseControl extends React.Component {
         prompt={this.state.selectedPrompt}/>
     } else if (this.state.selectedPrompt !== null && this.state.selectedResponse === null) {
       currentlyVisibleState = <PromptDetails
-        prompt={this.state.selectedPrompt}/>
+        prompt={this.state.selectedPrompt}
+        handleAddNewResponseClick={this.showForm}/>
     } else {
       currentlyVisibleState = <Prompts/>
     }

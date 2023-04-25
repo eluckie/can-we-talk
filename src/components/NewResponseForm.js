@@ -17,8 +17,9 @@ function NewResponseForm(props) {
   return (
     <React.Fragment>
       <div id="prompt-card">
-        <h1>{props.prompt}</h1>
+        {/* insert prompt here */}
       </div>
+      <br/>
       <form onSubmit={handleNewResponseFormSubmission}>
         <textarea
           type="text"
