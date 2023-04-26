@@ -10,8 +10,8 @@ function NewResponseForm(props) {
     props.onNewResponseCreation({
       prompt: prompt,
       body: event.target.body.value,
-      upvotes: 0,
-      downvotes: 0,
+      upvoteCount: 0,
+      downvoteCount: 0,
       id: v4()
     });
   }

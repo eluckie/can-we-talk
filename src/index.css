@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-#red {
+#pink {
   color: hotpink;
   font-weight: bold;
   margin: 10px 10px 30px 10px;
@@ -24,7 +24,7 @@ code {
   margin: 10px 10px 30px 10px;
 }
 
-#red-btn {
+#pink-btn {
   margin: 10px 10px 30px 30px;
   padding: 10px;
   background-color: pink;

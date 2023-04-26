@@ -13,10 +13,11 @@ function PromptDetails(props) {
         {props.promptResponses.map((response) =>
           <div id="response-div" key={response.id}>
             <Response
+              whenResponseClicked={props.onResponseSelection}
               prompt={prompt}
               body={response.body}
-              upvotes={response.upvotes}
-              downvotes={response.downvotes}
+              upvoteCount={response.upvoteCount}
+              downvoteCount={response.downvoteCount}
               id={response.id}
             />
           </div>
@@ -28,7 +29,9 @@ function PromptDetails(props) {
 PromptDetails.propTypes = {
   prompt: PropTypes.object,
   handleAddNewResponseClick: PropTypes.func,
-  promptResponses: PropTypes.array
+  promptResponses: PropTypes.array,
+  handleUpvoteClick: PropTypes.func,
+  handleDownvoteClick: PropTypes.func
 };
 
 export default PromptDetails;

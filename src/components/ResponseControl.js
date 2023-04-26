@@ -3,6 +3,7 @@ import Prompts from "./Prompts";
 import NewResponseForm from "./NewResponseForm";
 import PromptDetails from "./PromptDetails";
 import Header from "./Header";
+import ResponseDetails from "./ResponseDetails";
 
 class ResponseControl extends React.Component {
   constructor(props) {
@@ -37,29 +38,42 @@ class ResponseControl extends React.Component {
 
   showPrompt1 = () => {
     this.setState({selectedPromptsResponses: null});
-    const filteredResponses = this.state.responseList.filter(resp => resp.prompt.id === this.promptList[0].id);
+    const filteredList = this.filterResponseList();
     this.setState({
       selectedPrompt: this.promptList[0],
-      selectedPromptsResponses: filteredResponses
+      selectedResponse: null,
+      selectedPromptsResponses: filteredList
     });
   }
 
   showPrompt2 = () => {
-    this.setState({selectedPrompt: this.promptList[1]});
+    this.setState({selectedPromptsResponses: null});
     const filteredList = this.filterResponseList();
-    this.setState({selectedPromptsResponses: filteredList});
+    this.setState({
+      selectedPrompt: this.promptList[1],
+      selectedResponse: null,
+      selectedPromptsResponses: filteredList
+    });
   }
 
   showPrompt3 = () => {
-    this.setState({selectedPrompt: this.promptList[2]});
+    this.setState({selectedPromptsResponses: null});
     const filteredList = this.filterResponseList();
-    this.setState({selectedPromptsResponses: filteredList});
+    this.setState({
+      selectedPrompt: this.promptList[2],
+      selectedResponse: null,
+      selectedPromptsResponses: filteredList
+    });
   }
 
   showPrompt4 = () => {
-    this.setState({selectedPrompt: this.promptList[3]});
+    this.setState({selectedPromptsResponses: null});
     const filteredList = this.filterResponseList();
-    this.setState({selectedPromptsResponses: filteredList});
+    this.setState({
+      selectedPrompt: this.promptList[3],
+      selectedResponse: null,
+      selectedPromptsResponses: filteredList
+    });
   }
 
   showForm = () => {
@@ -81,13 +95,67 @@ class ResponseControl extends React.Component {
   }
 
   filterResponseList = () => {
-    const filteredResponses = this.state.responseList.filter(resp => resp.prompt.id === this.state.selectedPrompt.id);
+    const filteredResponses = this.state.responseList
+      .filter(resp => resp.prompt.id === this.state.selectedPrompt.id)
+      .sort(resp => resp.upvoteCount)
     return filteredResponses;
+  }
+
+  handleChangingSelectedResponse = (id) => {
+    const selectedResponse = this.state.responseList.filter(resp => resp.id === id)[0];
+    this.setState({selectedResponse: selectedResponse});
+  }
+
+  handleUpvoting = (id) => {
+    const currentPrompt = this.state.selectedPrompt;
+    const responseToUpvote = this.state.responseList.filter(resp => resp.id === id)[0];
+    this.setState({selectedResponse: responseToUpvote});
+    const newUpvoteCount = responseToUpvote.upvoteCount + 1;
+    const upvotedResponse = {
+      body: responseToUpvote.body,
+      upvoteCount: newUpvoteCount,
+      downvoteCount: responseToUpvote.downvoteCount,
+      prompt: responseToUpvote.prompt,
+      id: responseToUpvote.id
+    }
+
+    const updatedResponseList = this.state.responseList
+      .filter(resp => resp.id !== id)
+      .concat(upvotedResponse);
+    this.setState({
+      responseList: updatedResponseList,
+      selectedPrompt: currentPrompt,
+      selectedResponse: upvotedResponse
+    });
+  }
+
+  handleDownvoting = (id) => {
+    const currentPrompt = this.state.selectedPrompt;
+    const responseToDownvote = this.state.responseList.filter(resp => resp.id === id)[0];
+    this.setState({selectedResponse: responseToDownvote});
+    const newDownvoteCount = responseToDownvote.downvoteCount + 1;
+    const downvotedResponse = {
+      body: responseToDownvote.body,
+      upvoteCount: responseToDownvote.upvoteCount,
+      downvoteCount: newDownvoteCount,
+      prompt: responseToDownvote.prompt,
+      id: responseToDownvote.id
+    }
+
+    const updatedResponseList = this.state.responseList
+      .filter(resp => resp.id !== id)
+      .concat(downvotedResponse);
+    this.setState({
+      responseList: updatedResponseList,
+      selectedPrompt: currentPrompt,
+      selectedResponse: downvotedResponse
+    });
   }
 
   render() {
     let currentlyVisibleState = null;
-    let filteredList = this.filterResponseList();
+    const listToFilter = this.filterResponseList();
+    const filteredList = listToFilter.sort(resp => resp.upvoteCount).reverse();
 
     if(this.state.formVisible) {
       currentlyVisibleState = <NewResponseForm
@@ -98,7 +166,14 @@ class ResponseControl extends React.Component {
       currentlyVisibleState = <PromptDetails
         prompt={this.state.selectedPrompt}
         handleAddNewResponseClick={this.showForm}
-        promptResponses={filteredList}/>
+        promptResponses={filteredList}
+        onResponseSelection={this.handleChangingSelectedResponse}/>
+    } else if (this.state.selectedPrompt !== null && this.state.selectedResponse !== null) {
+      currentlyVisibleState = <ResponseDetails
+        prompt={this.state.selectedPrompt}
+        response={this.state.selectedResponse}
+        handleUpvoteClick={this.handleUpvoting}
+        handleDownvoteClick={this.handleDownvoting}/>
     } else {
       currentlyVisibleState = <Prompts/>
     }
