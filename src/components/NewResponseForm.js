@@ -1,15 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { v4 } from "uuid";
-// import Prompts from "./Prompts"
 
 function NewResponseForm(props) {
+  const { prompt } = props;
 
   function handleNewResponseFormSubmission(event) {
     event.preventDefault();
     props.onNewResponseCreation({
-      prompt: this.state.selectedPrompt,
-      response: event.target.response.value,
+      prompt: prompt,
+      body: event.target.body.value,
+      upvotes: 0,
+      downvotes: 0,
       id: v4()
     });
   }
@@ -17,26 +19,29 @@ function NewResponseForm(props) {
   return (
     <React.Fragment>
       <div id="prompt-card">
-        {/* insert prompt here */}
+        <h3>{prompt.text}</h3>
       </div>
       <br/>
       <form onSubmit={handleNewResponseFormSubmission}>
         <textarea
           type="text"
-          name="response"
+          name="body"
           placeholder="Now what do you have to say for yourself?"
           rows={10}
           cols={40}/>
         <br/>
         <button type="submit">speak my truth</button>
       </form>
+      <br/>
+      <button onClick={props.hideResponseForm}>nevermind</button>
     </React.Fragment>
   );
 }
 
 NewResponseForm.propTypes = {
   onNewResponseCreation: PropTypes.func,
-  prompt: PropTypes.object
+  prompt: PropTypes.object,
+  hideResponseForm: PropTypes.func
 };
 
 export default NewResponseForm;

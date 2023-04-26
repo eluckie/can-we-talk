@@ -2,7 +2,7 @@
 
 #### By E. Luckie ☀️
 
-#### This web application is a vote-based discussion forum. Users are able to add posts to the forum, and up or down-vote other posts. The amount of up-votes on a post determines how high up the page it is displayed.
+#### This web application is a vote-based discussion forum. Users are able to add posts to the forum in response to prompts, and up or down-vote other posts. The amount of up-votes on a post determines how high up the page it is displayed.
 
 [Click here](https://eluckie.github.io/can-we-talk/) to view the live version of this forum discussion webpage.
 

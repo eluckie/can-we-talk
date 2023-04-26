@@ -11,3 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#red {
+  color: hotpink;
+  font-weight: bold;
+  margin: 10px 10px 30px 10px;
+}
+
+#green {
+  color: green;
+  font-weight: bold;
+  margin: 10px 10px 30px 10px;
+}
+
+#red-btn {
+  margin: 10px 10px 30px 30px;
+  padding: 10px;
+  background-color: pink;
+  border-color: pink;
+}
+
+#green-btn {
+  margin: 10px 30px 30px 10px;
+  padding: 10px;
+  background-color: lightgreen;
+  border-color: lightgreen;
+}
+
+#response-div {
+  border: 2px solid grey;
+  margin: 10px;
+  padding: 10px;
+}

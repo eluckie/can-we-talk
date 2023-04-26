@@ -11,7 +11,7 @@ function Prompts(props) {
 
 Prompts.propTypes = {
   text: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.number
 };
 
 export default Prompts;

@@ -10,7 +10,9 @@ class ResponseControl extends React.Component {
     this.state = {
       formVisible: false,
       selectedPrompt: null,
-      selectedResponse: null
+      selectedResponse: null,
+      responseList: [],
+      selectedPromptsResponses: []
     };
   }
 
@@ -34,35 +36,69 @@ class ResponseControl extends React.Component {
   ];
 
   showPrompt1 = () => {
-    this.setState({selectedPrompt: this.promptList[0]});
+    this.setState({selectedPromptsResponses: null});
+    const filteredResponses = this.state.responseList.filter(resp => resp.prompt.id === this.promptList[0].id);
+    this.setState({
+      selectedPrompt: this.promptList[0],
+      selectedPromptsResponses: filteredResponses
+    });
   }
 
   showPrompt2 = () => {
     this.setState({selectedPrompt: this.promptList[1]});
+    const filteredList = this.filterResponseList();
+    this.setState({selectedPromptsResponses: filteredList});
   }
 
   showPrompt3 = () => {
     this.setState({selectedPrompt: this.promptList[2]});
+    const filteredList = this.filterResponseList();
+    this.setState({selectedPromptsResponses: filteredList});
   }
 
   showPrompt4 = () => {
     this.setState({selectedPrompt: this.promptList[3]});
+    const filteredList = this.filterResponseList();
+    this.setState({selectedPromptsResponses: filteredList});
   }
 
   showForm = () => {
     this.setState({formVisible: true});
   }
 
+  hideForm = () => {
+    this.setState({formVisible: false});
+  }
+
+  handleAddingResponseToPrompt = (newResponse) => {
+    const newResponseList = this.state.responseList.concat(newResponse);
+    this.setState({
+      responseList: newResponseList,
+      formVisible: false
+    });
+    const filteredList = this.filterResponseList();
+    this.setState({selectedPromptsResponses: filteredList});
+  }
+
+  filterResponseList = () => {
+    const filteredResponses = this.state.responseList.filter(resp => resp.prompt.id === this.state.selectedPrompt.id);
+    return filteredResponses;
+  }
+
   render() {
     let currentlyVisibleState = null;
+    let filteredList = this.filterResponseList();
 
     if(this.state.formVisible) {
       currentlyVisibleState = <NewResponseForm
-        prompt={this.state.selectedPrompt}/>
+        prompt={this.state.selectedPrompt}
+        hideResponseForm={this.hideForm}
+        onNewResponseCreation={this.handleAddingResponseToPrompt}/>
     } else if (this.state.selectedPrompt !== null && this.state.selectedResponse === null) {
       currentlyVisibleState = <PromptDetails
         prompt={this.state.selectedPrompt}
-        handleAddNewResponseClick={this.showForm}/>
+        handleAddNewResponseClick={this.showForm}
+        promptResponses={filteredList}/>
     } else {
       currentlyVisibleState = <Prompts/>
     }
