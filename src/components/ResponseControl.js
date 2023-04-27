@@ -130,7 +130,7 @@ class ResponseControl extends React.Component {
   handleDownvoting = (id) => {
     const currentPrompt = this.state.selectedPrompt;
     const responseToDownvote = this.state.responseList.filter(resp => resp.id === id)[0];
-    const newDownvoteCount = responseToDownvote.downvoteCount + 1;
+    const newDownvoteCount = responseToDownvote.downvoteCount - 1;
     const downvotedResponse = {
       body: responseToDownvote.body,
       upvoteCount: responseToDownvote.upvoteCount,
@@ -146,16 +146,6 @@ class ResponseControl extends React.Component {
       responseList: updatedResponseList,
       selectedPrompt: currentPrompt
     });
-  }
-
-  handleUpvotingFromDetails = (id) => {
-    this.handleUpvoting(id);
-    this.setState({selectedResponse: null});
-  }
-
-  handleDownvotingFromDetails = (id) => {
-    this.handleDownvoting(id);
-    this.setState({selectedResponse: null});
   }
 
   render() {
@@ -178,9 +168,7 @@ class ResponseControl extends React.Component {
     } else if (this.state.selectedPrompt !== null && this.state.selectedResponse !== null) {
       currentlyVisibleState = <ResponseDetails
         prompt={this.state.selectedPrompt}
-        response={this.state.selectedResponse}
-        handleUpvoteClick={this.handleUpvotingFromDetails}
-        handleDownvoteClick={this.handleDownvotingFromDetails}/>
+        response={this.state.selectedResponse}/>
     } else {
       currentlyVisibleState = <Prompts/>
     }

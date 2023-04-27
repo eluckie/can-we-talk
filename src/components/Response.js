@@ -6,8 +6,9 @@ function Response(props) {
     <React.Fragment>
       <div>
         <p onClick={() => props.whenResponseClicked(props.id)}>{props.body}</p>
-        <div id="reaction-btns" onClick={() => props.whenUpvoteClicked(props.id)}>👌🏾<span id="green">{props.upvoteCount}</span></div>
-        <div id="reaction-btns" onClick={() => props.whenDownvoteClicked(props.id)}>🖕🏾<span id="pink">{props.downvoteCount}</span></div>
+        <br/>
+        <button id="green-btn" onClick={() => props.whenUpvoteClicked(props.id)}><span id="green">{props.upvoteCount}</span></button>
+        <button id="pink-btn" onClick={() => props.whenDownvoteClicked(props.id)}><span id="pink">{props.downvoteCount}</span></button>
       </div>
     </React.Fragment>
   );
