@@ -1,9 +1,9 @@
-import * as a from "../actions/ActionTypes";
+import * as c from "../actions/ActionTypes";
 
 const reducer = (state = {}, action) => {
   const { prompt, body, upvoteCount, downvoteCount, date, id } = action;
   switch (action.type) {
-    case a.ADD_RESPONSE:
+    case c.ADD_RESPONSE:
       return Object.assign({}, state, {
         [id]: {
           prompt: prompt,
@@ -14,7 +14,7 @@ const reducer = (state = {}, action) => {
           id: id
         }
       });
-      case a.DELETE_RESPONSE:
+      case c.DELETE_RESPONSE:
         let newState = {...state};
         delete newState[id];
         return newState;

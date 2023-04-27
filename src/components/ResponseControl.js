@@ -4,6 +4,8 @@ import NewResponseForm from "./NewResponseForm";
 import PromptDetails from "./PromptDetails";
 import Header from "./Header";
 import ResponseDetails from "./ResponseDetails";
+import { connect } from "react-redux";
+import * as a from "../actions/ActionTypes";
 
 class ResponseControl extends React.Component {
   constructor(props) {
@@ -150,6 +152,16 @@ class ResponseControl extends React.Component {
     });
   }
 
+  handleDeletingResponse = (id) => {
+    const filteredResponseList = this.filterResponseList();
+    const newResponseList = this.state.responseList.filter(resp => resp.id !== id);
+    this.setState({
+      responseList: newResponseList,
+      selectedPromptsResponses: filteredResponseList,
+      selectedResponse: null
+    });
+  }
+
   render() {
     let currentlyVisibleState = null;
     const filteredList = this.filterResponseList();
@@ -170,7 +182,8 @@ class ResponseControl extends React.Component {
     } else if (this.state.selectedPrompt !== null && this.state.selectedResponse !== null) {
       currentlyVisibleState = <ResponseDetails
         prompt={this.state.selectedPrompt}
-        response={this.state.selectedResponse}/>
+        response={this.state.selectedResponse}
+        onClickingDelete={this.handleDeletingResponse}/>
     } else {
       currentlyVisibleState = <Prompts/>
     }
@@ -187,5 +200,7 @@ class ResponseControl extends React.Component {
     );
   }
 }
+
+ResponseControl = connect()(ResponseControl);
 
 export default ResponseControl;

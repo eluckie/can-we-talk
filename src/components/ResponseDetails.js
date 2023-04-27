@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ResponseDetails(props) {
 
@@ -12,9 +13,15 @@ function ResponseDetails(props) {
         <div id="reaction-btns">🖕🏾<span id="pink">{props.response.downvoteCount}</span></div>
         <br/><br/>
         <p id="tiny-font">{props.response.date}</p>
+        <br/>
       </div>
+      <p id="tiny-font" onClick={() => props.onClickingDelete(props.response.id)}>delete reponse</p>
     </React.Fragment>
   );
 }
+
+ResponseDetails.propTypes = {
+  onClickingDelete: PropTypes.func
+};
 
 export default ResponseDetails;
