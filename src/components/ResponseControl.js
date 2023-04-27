@@ -109,7 +109,6 @@ class ResponseControl extends React.Component {
   handleUpvoting = (id) => {
     const currentPrompt = this.state.selectedPrompt;
     const responseToUpvote = this.state.responseList.filter(resp => resp.id === id)[0];
-    this.setState({selectedResponse: responseToUpvote});
     const newUpvoteCount = responseToUpvote.upvoteCount + 1;
     const upvotedResponse = {
       body: responseToUpvote.body,
@@ -124,15 +123,13 @@ class ResponseControl extends React.Component {
       .concat(upvotedResponse);
     this.setState({
       responseList: updatedResponseList,
-      selectedPrompt: currentPrompt,
-      selectedResponse: upvotedResponse
+      selectedPrompt: currentPrompt
     });
   }
 
   handleDownvoting = (id) => {
     const currentPrompt = this.state.selectedPrompt;
     const responseToDownvote = this.state.responseList.filter(resp => resp.id === id)[0];
-    this.setState({selectedResponse: responseToDownvote});
     const newDownvoteCount = responseToDownvote.downvoteCount + 1;
     const downvotedResponse = {
       body: responseToDownvote.body,
@@ -147,15 +144,23 @@ class ResponseControl extends React.Component {
       .concat(downvotedResponse);
     this.setState({
       responseList: updatedResponseList,
-      selectedPrompt: currentPrompt,
-      selectedResponse: downvotedResponse
+      selectedPrompt: currentPrompt
     });
+  }
+
+  handleUpvotingFromDetails = (id) => {
+    this.handleUpvoting(id);
+    this.setState({selectedResponse: null});
+  }
+
+  handleDownvotingFromDetails = (id) => {
+    this.handleDownvoting(id);
+    this.setState({selectedResponse: null});
   }
 
   render() {
     let currentlyVisibleState = null;
-    const listToFilter = this.filterResponseList();
-    const filteredList = listToFilter.sort(resp => resp.upvoteCount).reverse();
+    const filteredList = this.filterResponseList();
 
     if(this.state.formVisible) {
       currentlyVisibleState = <NewResponseForm
@@ -167,13 +172,15 @@ class ResponseControl extends React.Component {
         prompt={this.state.selectedPrompt}
         handleAddNewResponseClick={this.showForm}
         promptResponses={filteredList}
-        onResponseSelection={this.handleChangingSelectedResponse}/>
+        onResponseSelection={this.handleChangingSelectedResponse}
+        onUpvoting={this.handleUpvoting}
+        onDownvoting={this.handleDownvoting}/>
     } else if (this.state.selectedPrompt !== null && this.state.selectedResponse !== null) {
       currentlyVisibleState = <ResponseDetails
         prompt={this.state.selectedPrompt}
         response={this.state.selectedResponse}
-        handleUpvoteClick={this.handleUpvoting}
-        handleDownvoteClick={this.handleDownvoting}/>
+        handleUpvoteClick={this.handleUpvotingFromDetails}
+        handleDownvoteClick={this.handleDownvotingFromDetails}/>
     } else {
       currentlyVisibleState = <Prompts/>
     }

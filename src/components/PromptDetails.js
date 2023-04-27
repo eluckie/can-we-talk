@@ -14,6 +14,8 @@ function PromptDetails(props) {
           <div id="response-div" key={response.id}>
             <Response
               whenResponseClicked={props.onResponseSelection}
+              whenDownvoteClicked={props.onDownvoting}
+              whenUpvoteClicked={props.onUpvoting}
               prompt={prompt}
               body={response.body}
               upvoteCount={response.upvoteCount}
@@ -30,8 +32,8 @@ PromptDetails.propTypes = {
   prompt: PropTypes.object,
   handleAddNewResponseClick: PropTypes.func,
   promptResponses: PropTypes.array,
-  handleUpvoteClick: PropTypes.func,
-  handleDownvoteClick: PropTypes.func
+  whenUpvoteClicked: PropTypes.func,
+  whenDownvoteClicked: PropTypes.func
 };
 
 export default PromptDetails;

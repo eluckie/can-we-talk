@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 10px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -42,4 +43,15 @@ code {
   border: 2px solid grey;
   margin: 10px;
   padding: 10px;
+  text-align: center;
+}
+
+#reaction-btns {
+  display: inline-block;
+  text-align: center;
+  margin: 30px;
+}
+
+#timestamp {
+  float: right;
 }
