@@ -11,13 +11,11 @@ function ResponseDetails(props) {
         <div id="reaction-btns">👌🏾<span id="green">{props.response.upvoteCount}</span></div>
         <div id="reaction-btns">🖕🏾<span id="pink">{props.response.downvoteCount}</span></div>
         <br/><br/>
-        <p id="timestamp">*add date & timestamp*</p>
+        <p id="tiny-font">{props.response.date}</p>
+        <br/>
       </div>
     </React.Fragment>
   );
 }
 
 export default ResponseDetails;
-
-// onClick={() => props.handleDownvoteClick(props.response.id)}
-// onClick={() => props.handleUpvoteClick(props.response.id)}

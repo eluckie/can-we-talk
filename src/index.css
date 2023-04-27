@@ -52,6 +52,7 @@ code {
   margin: 30px;
 }
 
-#timestamp {
+#tiny-font {
+  font-size: 11px;
   float: right;
 }

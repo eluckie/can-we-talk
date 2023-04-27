@@ -5,6 +5,8 @@ function Response(props) {
   return (
     <React.Fragment>
       <div>
+        <p id="tiny-font">{props.date}</p>
+        <br/><br/>
         <p onClick={() => props.whenResponseClicked(props.id)}>{props.body}</p>
         <br/>
         <button id="green-btn" onClick={() => props.whenUpvoteClicked(props.id)}><span id="green">{props.upvoteCount}</span></button>
@@ -22,7 +24,8 @@ Response.propTypes = {
   id: PropTypes.string,
   whenResponseClicked: PropTypes.func,
   handleDownvoteClick: PropTypes.func,
-  handleUpvoteClick: PropTypes.func
+  handleUpvoteClick: PropTypes.func,
+  date: PropTypes.string
 };
 
 export default Response;

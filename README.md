@@ -60,7 +60,6 @@ Then, take the remaining class session(s) to put the finishing touches on your p
 
 ## Stretch Plans
 
-* As a user, I want my new posts to include a timestamp. And I want to see when other listings were posted, too.
 * As a user, I'd like posts with the most upvotes to appear higher on the page. (We haven't explicitly covered this in our curriculum, but here's a hint: You can complete logic before the ``return`` statement of a ``mapStateToProps()`` method!)
 
 

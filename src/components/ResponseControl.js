@@ -115,6 +115,7 @@ class ResponseControl extends React.Component {
       upvoteCount: newUpvoteCount,
       downvoteCount: responseToUpvote.downvoteCount,
       prompt: responseToUpvote.prompt,
+      date: responseToUpvote.date,
       id: responseToUpvote.id
     }
 
@@ -136,6 +137,7 @@ class ResponseControl extends React.Component {
       upvoteCount: responseToDownvote.upvoteCount,
       downvoteCount: newDownvoteCount,
       prompt: responseToDownvote.prompt,
+      date: responseToDownvote.date,
       id: responseToDownvote.id
     }
 

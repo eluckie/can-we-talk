@@ -20,6 +20,7 @@ function PromptDetails(props) {
               body={response.body}
               upvoteCount={response.upvoteCount}
               downvoteCount={response.downvoteCount}
+              date={response.date}
               id={response.id}
             />
           </div>

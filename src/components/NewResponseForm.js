@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { v4 } from "uuid";
+import { format } from "date-fns";
 
 function NewResponseForm(props) {
   const { prompt } = props;
@@ -12,6 +13,7 @@ function NewResponseForm(props) {
       body: event.target.body.value,
       upvoteCount: 0,
       downvoteCount: 0,
+      date: format(new Date(), 'Pp'),
       id: v4()
     });
   }
