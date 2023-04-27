@@ -12,7 +12,6 @@ function ResponseDetails(props) {
         <div id="reaction-btns">🖕🏾<span id="pink">{props.response.downvoteCount}</span></div>
         <br/><br/>
         <p id="tiny-font">{props.response.date}</p>
-        <br/>
       </div>
     </React.Fragment>
   );

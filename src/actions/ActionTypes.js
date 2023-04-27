@@ -1,0 +1,3 @@
+export const ADD_RESPONSE = "ADD_RESPONSE";
+export const DELETE_RESPONSE = "DELETE_RESPONSE";
+export const TOGGLE_FORM = "TOGGLE_FORM";
